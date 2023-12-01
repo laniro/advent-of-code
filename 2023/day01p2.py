@@ -18,30 +18,36 @@ def word2num(word):
 
 with open("2023/in.txt","r") as f:
     for line in f.readlines():
-        presentList = []
         indexList = []
+        lineList = []
+        
+        line = line.replace("one","onee")
+        line = line.replace("two", "twoo")
+        line = line.replace("three","threee")
+        line = line.replace("five","fivee")
+        line = line.replace("seven","sevenn")
+        line = line.replace("eight","eightt")
+        line = line.replace("nine","ninee")
+
+        for item in indices[9:]:
+            line = line.replace(item,str(word2num(item)))
+        
+
+        for item in line:
+            if item in indices:
+                lineList.append(item)
+
+
+        line = ''.join(lineList)
+
         for item in indices:
-            if str(item) in line:
-                presentList.append(item)
+            try: 
+                indexList.append(line.index(item))
+            except: pass
 
-        # iterate through presence presentList and find indices
-        for number in presentList:
-            index = line.find(str(number))
-            indexList.append(index)
-
-        # generate new list with indices. both lists match ie present numbers [1,2,9] matches to indices [3,0,4]
-        # done in above step
-
-        # get index in presence presentList of lowest and highest indices ie lowest = 0 --> 2, highest = 4 --> 9
-        lowIndex = presentList[indexList.index(min(indexList))]
-        highIndex = presentList[indexList.index(max(indexList))]
-
-        # convert words to numbers
-        lowIndex = str(word2num(lowIndex))
-        highIndex = str(word2num(highIndex))
-
-        # concatenate lowest + highest number
-        finalNum = int(lowIndex+highIndex)
+        finalNum = int(line[0]+line[-1])
+        print(finalNum)
+        
 
         # add to total
         total+= finalNum
