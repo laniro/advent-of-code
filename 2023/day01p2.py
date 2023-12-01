@@ -18,31 +18,18 @@ with open("2023/in.txt","r") as f:
     for line in f.readlines():
         indexList = []
         lineList = []
-        
-        line = line.replace("one","onee")
-        line = line.replace("two", "twoo")
-        line = line.replace("three","threee")
-        line = line.replace("five","fivee")
-        line = line.replace("seven","sevenn")
-        line = line.replace("eight","eightt")
-        line = line.replace("nine","ninee")
-
+        # adding extra letters to end of lines. for example: 6two6threeeightwott -> 6twoo6threeeeighttwoott
+        for item in indices[9:]:
+            if item != "four" and item != "six":
+                line = line.replace(item,item+item[-1])
+        # replacing words with numbers: 6twoo6threeeeighttwoott -> 62o63e82ott
         for item in indices[9:]:
             line = line.replace(item,str(word2num(item)))
-        
+        # adds numbers to new list: 62o63e82ott -> [6,2,6,3,8,2]
         for item in line:
             if item in indices:
                 lineList.append(item)
-
-        line = ''.join(lineList)
-
-        for item in indices:
-            try: 
-                indexList.append(line.index(item))
-            except: pass
-
-        finalNum = int(line[0]+line[-1])
-        print(finalNum)
-        
+        # concats first item in list to last item and adds it to total.
+        finalNum = int(lineList[0]+lineList[-1])
         total+= finalNum
 print(total)
