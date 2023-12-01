@@ -18,7 +18,7 @@ with open("2023/in.txt","r") as f:
     for line in f.readlines():
         indexList = []
         lineList = []
-        # adding extra letters to end of lines. for example: 6two6threeeightwott -> 6twoo6threeeeighttwoott
+        # adding extra letters to end of lines: 6two6threeeightwott -> 6twoo6threeeeighttwoott
         for item in indices[9:]:
             if item != "four" and item != "six":
                 line = line.replace(item,item+item[-1])
