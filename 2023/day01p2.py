@@ -30,5 +30,5 @@ with open("2023/in.txt","r") as f:
             if item in indices:
                 lineList.append(item)
         # concats first item in list to last item and adds it to total.
-        total +=  int(lineList[0]+lineList[-1])
+        total += int(lineList[0]+lineList[-1])
 print(total)
