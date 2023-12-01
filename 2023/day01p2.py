@@ -1,7 +1,5 @@
 total = 0
 indices = ["1","2","3","4","5","6","7","8","9","one","two","three","four","five","six","seven","eight","nine"]
-presentList = []
-indexList = []
 
 def word2num(word):
     match word:
@@ -32,11 +30,9 @@ with open("2023/in.txt","r") as f:
         for item in indices[9:]:
             line = line.replace(item,str(word2num(item)))
         
-
         for item in line:
             if item in indices:
                 lineList.append(item)
-
 
         line = ''.join(lineList)
 
@@ -48,11 +44,5 @@ with open("2023/in.txt","r") as f:
         finalNum = int(line[0]+line[-1])
         print(finalNum)
         
-
-        # add to total
         total+= finalNum
-
 print(total)
-
-
-# 58ninehxcsnzfxbf6xvgcrfznrldqntsbsjmr5
