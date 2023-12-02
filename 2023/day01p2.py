@@ -1,7 +1,5 @@
 total = 0
 indices = ["1","2","3","4","5","6","7","8","9","one","two","three","four","five","six","seven","eight","nine"]
-presentList = []
-indexList = []
 
 def word2num(word):
     match word:
@@ -18,35 +16,19 @@ def word2num(word):
 
 with open("2023/in.txt","r") as f:
     for line in f.readlines():
-        presentList = []
         indexList = []
-        for item in indices:
-            if str(item) in line:
-                presentList.append(item)
-
-        # iterate through presence presentList and find indices
-        for number in presentList:
-            index = line.find(str(number))
-            indexList.append(index)
-
-        # generate new list with indices. both lists match ie present numbers [1,2,9] matches to indices [3,0,4]
-        # done in above step
-
-        # get index in presence presentList of lowest and highest indices ie lowest = 0 --> 2, highest = 4 --> 9
-        lowIndex = presentList[indexList.index(min(indexList))]
-        highIndex = presentList[indexList.index(max(indexList))]
-
-        # convert words to numbers
-        lowIndex = str(word2num(lowIndex))
-        highIndex = str(word2num(highIndex))
-
-        # concatenate lowest + highest number
-        finalNum = int(lowIndex+highIndex)
-
-        # add to total
-        total+= finalNum
-
+        lineList = []
+        # adding extra letters to end of lines: 6two6threeeightwott -> 6twoo6threeeeighttwoott
+        for item in indices[9:]:
+            if item != "four" and item != "six":
+                line = line.replace(item,item+item[-1])
+        # replacing words with numbers: 6twoo6threeeeighttwoott -> 62o63e82ott
+        for item in indices[9:]:
+            line = line.replace(item,str(word2num(item)))
+        # adds numbers to new list: 62o63e82ott -> [6,2,6,3,8,2]
+        for item in line:
+            if item in indices:
+                lineList.append(item)
+        # concats first item in list to last item and adds it to total.
+        total += int(lineList[0]+lineList[-1])
 print(total)
-
-
-# 58ninehxcsnzfxbf6xvgcrfznrldqntsbsjmr5
