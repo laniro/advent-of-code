@@ -14,3 +14,4 @@ with open("2023/in.txt","r") as f:
             if item in line[1]:
                 n += 1
         t += math.floor(2**(n-1))
+print(t)
