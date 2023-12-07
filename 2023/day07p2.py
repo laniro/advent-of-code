@@ -75,6 +75,5 @@ for player in enumerate(l):
     rank = player[0]
     id = player[1][0]
     bid = int(f[id][1].split()[1])
-    ct = returnCases[player[1][1]]
     tw+=bid*rank
 print(tw)
