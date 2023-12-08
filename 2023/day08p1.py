@@ -2,10 +2,8 @@ with open("2023/in.txt","r") as f:
     f = [x.strip() for x in f.readlines() if x != '\n']
 
 directions = f[0]
-f = f[1:]
-f = [tuple(x.split(" = ")) for x in f]
+f = [tuple(x.split(" = ")) for x in f[1:]]
 f = {i: tuple(l[1:-1].split(", ")) for i, l in f}
-f = {i: x for i, x in sorted(f.items())}
 location = 'AAA'
 
 c=1
