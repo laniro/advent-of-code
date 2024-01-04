@@ -35,6 +35,9 @@ for line in f:
     cr = compress(r)
     
     if cr[0] == '#'*l[0]:
-        print(cr,"0")
+        print(cr,"0",l)
     if cr[-1] == '#'*l[-1]:
-        print(cr,"-1")
+        if r[-l[-1]-1] == '.':
+            cr.pop(-1)
+            cr.pop(-1)
+    print(cr)
