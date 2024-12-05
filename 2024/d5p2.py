@@ -49,11 +49,6 @@ for i in range(100):
 for i in ordering_rules:
     rules[int(i[1])].append(i[0])
 
-# rules is a list of numbers. At index x is stored the list of numbers that must be printed before x.
-
-#for x in range(len(rules)):
- #   print(x, rules[x])
-
 correcteds = []
 for update in incorrectly_ordered:
     ordered = []
@@ -73,8 +68,7 @@ for update in incorrectly_ordered:
             # finally, remove the current page from the queue (pages)
             if rule in ordered:
                 continue
-                # great, continue checking
-            elif rule not in ordered: # should be an else, but using a elif for now to make code comprehensible
+            else:
                 pages.append(page)
                 break
         else:
