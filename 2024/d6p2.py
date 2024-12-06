@@ -1,12 +1,13 @@
 t=0
 test = "C:/Users/tyler/Documents/advent of code/2024/test.txt"
 inp = "C:/Users/tyler/Documents/advent of code/2024/inp.txt"
-with open(inp, "r") as f:
+file_path = inp
+with open(file_path, "r") as f:
     f = f.readlines()
 
 def print_grid(list):
     for line in list:
-        print((line))
+        print(''.join(line))
 
 class Guard:
     def __init__(this, x, y, facing):
@@ -38,8 +39,6 @@ class Guard:
             case "West":
                 this.facing = "North"
 
-
-
 f = [list(y) for y in (x.strip() for x in f)]
 
 for r in range(len(f)):
@@ -47,8 +46,12 @@ for r in range(len(f)):
         if f[c][r] == '^':
             guard = Guard(c,r,"North")
 
-visited = []
+
+
 grid_size = (len(f)-1, len(f[guard.row])-1)
+og_guard = Guard(guard.column, guard.row, "North")
+
+visited = []
 while (guard.row,guard.column,guard.facing) not in visited:
     visited.append((guard.row,guard.column,guard.facing))
     f[guard.row][guard.column] = 'X'
@@ -60,19 +63,37 @@ while (guard.row,guard.column,guard.facing) not in visited:
         guard.moveForward(-1)
         guard.rotate()
         guard.moveForward()
-    
-    match guard.facing:
-            case "North":
-                f[guard.row][guard.column] = '^'
-            case "East":
-                f[guard.row][guard.column] = '>'
-            case "South":
-                f[guard.row][guard.column] = 'v'
-            case "West":
-                f[guard.row][guard.column] = '<'
 
 just_positions = []
 for x in visited:
     just_positions.append((x[0],x[1]))
 
-print(len(set(just_positions)))
+for i in range(grid_size[0]+1):
+    for j in range(grid_size[1]+1):
+        if (i,j) not in just_positions: continue
+        print(i,j)
+        # reset everything
+        guard = Guard(og_guard.column, og_guard.row, "North")
+        with open(file_path, "r") as f:
+            f = f.readlines()
+        f = [list(y) for y in (x.strip() for x in f)]
+        f[i][j] = '#'
+        
+        # main loop
+        visited = []
+        while (guard.row,guard.column,guard.facing) not in visited:
+            visited.append((guard.row,guard.column,guard.facing))
+            f[guard.row][guard.column] = 'X'
+            guard.moveForward()
+
+            if guard.row < 0 or guard.row > grid_size[0] or guard.column < 0 or guard.column > grid_size[1]: break
+
+            while f[guard.row][guard.column] == '#':
+                guard.moveForward(-1)
+                guard.rotate()
+                guard.moveForward()
+        else:
+            t+=1
+
+print(t)
+running = False
