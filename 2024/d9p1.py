@@ -32,8 +32,6 @@ if __name__ == "__main__":
     periods_removed = 0
     for i in range(len(main_list)):
         print(i, len(main_list))
-        if i >= len(main_list): break
-        if len(free) == 0: break
         if main_list[i] != '.': continue
         while main_list[-1] == '.':
             main_list.pop(-1)
