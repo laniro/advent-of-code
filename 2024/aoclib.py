@@ -11,7 +11,7 @@ class Vector2:
     
     def __ne__(self,other):
         return not (self == other)
-    
+
     def __add__(self, other):
         return Vector2(self.x + other.x, self.y + other.y)
 
@@ -30,12 +30,12 @@ class Vector2:
     
 
 class Queue:
-    def __init__(self,initial):
+    def __init__(self,initial=[]):
         if not isinstance(initial, list): self.queue = [initial]
         else: self.queue = initial
     
     def __repr__(self):
-        return "["+', '.join(map(str, self.queue))+"]"
+        return "<"+', '.join(map(str, self.queue))+">"
 
     def enqueue(self, item):
         self.queue.append(item)
