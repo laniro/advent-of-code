@@ -41,7 +41,6 @@ def get_adjacent_rolls(x,y,g):
 
 SHOW_GRID = False
 
-import copy
 def one():
     with open(0) as f:
         rolls = 0
@@ -58,6 +57,7 @@ def one():
                 for char in line:
                     print(char,end='')
                 print('')
+        
     return rolls
 
 
